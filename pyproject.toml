@@ -3,7 +3,7 @@ name = "prolif"
 description = "Interaction Fingerprints for protein-ligand complexes and more"
 authors = [{ name = "Cédric Bouysset", email = "cedric@bouysset.net" }]
 readme = "README.rst"
-requires-python = ">=3.12.12"
+requires-python = ">=3.11"
 version = "2.0.3.post1"
 dynamic = []
 classifiers = [
