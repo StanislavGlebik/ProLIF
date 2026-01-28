@@ -4,7 +4,8 @@ description = "Interaction Fingerprints for protein-ligand complexes and more"
 authors = [{ name = "Cédric Bouysset", email = "cedric@bouysset.net" }]
 readme = "README.rst"
 requires-python = ">=3.12.12"
-dynamic = ["version"]
+version = "2.0.3.post1"
+dynamic = []
 classifiers = [
     "Development Status :: 5 - Production/Stable",
     "Operating System :: OS Independent",
@@ -105,9 +106,6 @@ include = ["prolif*"]
 "prolif.data.protein_helper.templates" = ["*"]
 "prolif.data.implicitHbond" = ["*"]
 "prolif.plotting.network" = ["*"]
-
-[tool.setuptools.dynamic]
-version = { attr = "prolif._version.__version__" }
 
 [tool.uv]
 default-groups = ["dev"]
