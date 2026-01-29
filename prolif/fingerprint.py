@@ -31,8 +31,8 @@ from collections.abc import Iterable, Sequence, Sized
 from inspect import signature
 from typing import TYPE_CHECKING, Any, Literal, Optional, Union, cast, overload
 
-import dill
-import multiprocess as mp
+#import dill
+#import multiprocess as mp
 import numpy as np
 from MDAnalysis import AtomGroup
 from MDAnalysis.converters.RDKit import atomgroup_to_mol, set_converter_cache_size
@@ -47,7 +47,7 @@ from prolif.interactions.base import (
     _INTERACTIONS,
 )
 from prolif.molecule import Molecule
-from prolif.parallel import MolIterablePool, TrajectoryPool
+#from prolif.parallel import MolIterablePool, TrajectoryPool
 from prolif.plotting.utils import IS_NOTEBOOK
 from prolif.utils import (
     get_residues_near_ligand,
