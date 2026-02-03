@@ -757,7 +757,7 @@ class Fingerprint:
         *,
         residues: "ResidueSelection" = None,
         progress: bool = True,
-        n_jobs: int | None = None,
+        n_jobs: int | None = 1,
     ) -> "Fingerprint":
         """Generates the fingerprint between a list of ligands and a protein
 
