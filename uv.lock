@@ -413,6 +413,12 @@ wheels = [
 ]
 
 [[package]]
+name = "dill"
+version = "0.3.1.1"
+source = { registry = "https://us-python.pkg.dev/artifact-foundry-prod/ah-3p-staging-python/simple/" }
+sdist = { url = "https://us-python.pkg.dev/artifact-foundry-prod/ah-3p-staging-python/dill/dill-0.3.1.1.tar.gz", hash = "sha256:42d8ef819367516592a825746a18073ced42ca169ab1f5f4044134703e7a049c" }
+
+[[package]]
 name = "docutils"
 version = "0.19"
 source = { registry = "https://us-python.pkg.dev/artifact-foundry-prod/ah-3p-staging-python/simple/" }
@@ -1478,9 +1484,10 @@ wheels = [
 
 [[package]]
 name = "prolif"
-version = "2.0.3.post1"
+version = "2.0.3.post4"
 source = { editable = "." }
 dependencies = [
+    { name = "dill" },
     { name = "mdanalysis" },
     { name = "networkx" },
     { name = "numpy" },
@@ -1556,6 +1563,7 @@ type-check = [
 
 [package.metadata]
 requires-dist = [
+    { name = "dill", specifier = "==0.3.1.1" },
     { name = "matplotlib", marker = "extra == 'plots'", specifier = ">=3.5" },
     { name = "matplotlib", marker = "extra == 'tutorials'", specifier = ">=3.7" },
     { name = "mdanalysis", specifier = "==2.10.0" },

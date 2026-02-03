@@ -14,8 +14,8 @@ from threading import Event, Thread
 from time import sleep
 from typing import TYPE_CHECKING, Any, ClassVar, cast
 
-from multiprocess import Value
-from multiprocess.pool import Pool
+from multiprocessing import Value
+from multiprocessing.pool import Pool
 from tqdm.auto import tqdm
 
 from prolif.molecule import Molecule
