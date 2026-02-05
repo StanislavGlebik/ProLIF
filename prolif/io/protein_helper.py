@@ -28,6 +28,9 @@ from prolif.io.constants import (
 )
 from prolif.molecule import Molecule, pdbqt_supplier
 from prolif.residue import Residue, ResidueGroup
+from learning.deepmind.science.protein_platform import structure
+from learning.deepmind.science.protein_platform.external_tools.rdkit import rdkit_utils
+
 
 logger = logging.getLogger(__name__)
 
@@ -100,7 +103,7 @@ class ProteinHelper:
         # get a dict of the number of the heavy atoms in the template residues
         self.n_template_res_hatms = self.n_template_residue_heavy_atoms(self.templates)
 
-    def standardize_protein(self, input_topology: Molecule | str | Path) -> Molecule:
+    def standardize_protein(self, input_topology: Molecule | str | Path | structure.Structure) -> Molecule:
         """Standardize the protein molecule.
 
         This function will standardize the residue names, fix the bond orders,
@@ -144,7 +147,12 @@ class ProteinHelper:
         ):
             input_protein_top = Chem.MolFromPDBFile(str(input_topology), removeHs=False)
             protein_mol = Molecule.from_rdkit(input_protein_top)
-
+        elif isinstance(input_topology, structure.Structure):
+            input_protein_top = Chem.MolFromPDBBlock(
+                input_topology.to_pdb(),
+                removeHs=False,
+            )
+            protein_mol = Molecule.from_rdkit(input_protein_top)
         else:
             raise TypeError(
                 "input_topology must be a string (path to a PDB file) or "
