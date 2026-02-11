@@ -29,7 +29,6 @@ from prolif.io.constants import (
 from prolif.molecule import Molecule, pdbqt_supplier
 from prolif.residue import Residue, ResidueGroup
 from learning.deepmind.science.protein_platform import structure
-from learning.deepmind.science.protein_platform.external_tools.rdkit import rdkit_utils
 
 
 logger = logging.getLogger(__name__)
@@ -148,10 +147,35 @@ class ProteinHelper:
             input_protein_top = Chem.MolFromPDBFile(str(input_topology), removeHs=False)
             protein_mol = Molecule.from_rdkit(input_protein_top)
         elif isinstance(input_topology, structure.Structure):
+            to_rename = {}
+            reverse_rename = {}
+            res_idx = 0
+            for i in range(len(input_topology.residues_table.name)):
+               res_name = input_topology.residues_table.name[i]
+               if len(res_name) > 3 and res_name not in to_rename:
+                  new_name = f"_{res_idx:02}"
+                  to_rename[res_name] = new_name
+                  reverse_rename[new_name] = res_name
+                  res_idx += 1
+
+            if to_rename:
+                renamed_struc = input_topology.rename_res_name(res_name_map=to_rename)
+            else:
+                renamed_struc = input_topology
+
             input_protein_top = Chem.MolFromPDBBlock(
-                input_topology.to_pdb(),
+                renamed_struc.to_pdb(),
                 removeHs=False,
             )
+            for atom in input_protein_top.GetAtoms():
+               info = atom.GetMonomerInfo()
+               if not info:
+                  continue
+               current_res = info.GetResidueName()
+               new_res = reverse_rename.get(current_res, current_res)
+               info.SetResidueName(new_res)
+               atom.SetMonomerInfo(info)
+
             protein_mol = Molecule.from_rdkit(input_protein_top)
         else:
             raise TypeError(
