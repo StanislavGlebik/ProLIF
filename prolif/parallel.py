@@ -14,16 +14,16 @@ from threading import Event, Thread
 from time import sleep
 from typing import TYPE_CHECKING, Any, ClassVar, cast
 
-from multiprocessing import Value
-from multiprocessing.pool import Pool
+from multiprocess import Value
+from multiprocess.pool import Pool
 from tqdm.auto import tqdm
 
 from prolif.molecule import Molecule
 from prolif.pickling import PICKLE_HANDLER
 
 if TYPE_CHECKING:
-    from multiprocessing.pool import Pool as BuiltinPool
-    from multiprocessing.sharedctypes import Synchronized
+    from multiprocess.pool import Pool as BuiltinPool
+    from multiprocess.sharedctypes import Synchronized
 
     from numpy.typing import NDArray
 

@@ -32,7 +32,7 @@ from inspect import signature
 from typing import TYPE_CHECKING, Any, Literal, Optional, Union, cast, overload
 
 import dill
-import multiprocessing as mp
+import multiprocess as mp
 import numpy as np
 from MDAnalysis import AtomGroup
 from MDAnalysis.converters.RDKit import atomgroup_to_mol, set_converter_cache_size
